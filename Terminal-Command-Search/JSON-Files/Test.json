@@ -1,12 +1,13 @@
 [
   {
     "Command": "git clone",
-    "Description": "Klonowanie repozytorium zdalnego do lokalnego.",
-    "Example": "git clone https://github.com/user/repo.git"
+    "Description": "Clone the Repository from GitHub or GitLub",
+    "Example": "git clone https://github.com/user/repo.git",
+    "Test": "Test"
   },
   {
     "Command": "docker run",
-    "Description": "Uruchomienie kontenera Docker.",
+    "Description": "Start Docker Container",
     "Example": "docker run -it ubuntu"
   }
 ]

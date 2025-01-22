@@ -4,35 +4,51 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 
-class Program
+
+namespace TerminalCommandSearch
 {
-    static void Main()
+    class Program
     {
-        // Wczytanie danych z pliku JSON
-        var json = File.ReadAllText("/Users/mateuszadamiak/Documents/IT-Lernen/Programmierung /C#/Terminal-Command-Search/Terminal-Command-Search/JSON-Files/Test.json");
-        var commands = JsonConvert.DeserializeObject<List<Command>>(json);
-
-        Console.WriteLine("Wpisz frazę, aby znaleźć komendę:");
-        string query = Console.ReadLine();
-
-        // Wyszukiwanie w bazie komend
-        var results = commands.Where(c => c.description.Contains(query, StringComparison.OrdinalIgnoreCase) 
-                                          || c.command.Contains(query, StringComparison.OrdinalIgnoreCase));
-
-        Console.WriteLine("Znalezione komendy:");
-        foreach (var result in results)
+        static void Main()
         {
-            Console.WriteLine($"Komenda: {result.command}");
-            Console.WriteLine($"Opis: {result.description}");
-            Console.WriteLine($"Przykład: {result.example}");
-            Console.WriteLine();
+            //Read the information from JSON File
+            var json = File.ReadAllText("D:\\Programmierung\\C#\\VIsual STudio Console Dokumentation search\\Terminal-Command-Search\\JSON-Files\\Test.json");
+            var commands = JsonConvert.DeserializeObject<List<Command>>(json);
+
+            while (true)
+            {
+                Console.WriteLine("Enter a phrase to find a command:");
+                string query = Console.ReadLine();
+
+                // Search in Data Base and its change it to List
+                var results = commands.Where(c => c.description.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+
+                // Search if results have anything found
+                if (!results.Any())
+                {
+                    Console.WriteLine("Command not Found");
+                }
+                else
+                {
+                    Console.WriteLine("Commands found:");
+                    foreach (var result in results)
+                    {
+                        Console.WriteLine($"Commands: {result.command}");
+                        Console.WriteLine($"Description: {result.description}");
+                        Console.WriteLine($"Example: {result.example}");
+                        Console.WriteLine();
+                    }
+                }
+            }
         }
     }
-}
 
-class Command
-{
-    public string command { get; set; }
-    public string description { get; set; }
-    public string example { get; }
-}    
+
+    class Command
+    {
+        public string command { get; set; }
+        public string description { get; set; }
+        public string example { get; set; }
+    }
+}
+ 
